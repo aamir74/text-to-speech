@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --version:*)",
+      "Bash(where:*)",
+      "Bash(npm install)",
+      "Bash(dir:*)",
+      "Bash(python app.py:*)",
+      "Bash(pip install:*)",
+      "Bash(powershell -Command \"Remove-Item -Path ''\\?\\E:\\text-to-speech\\nul'' -Force -ErrorAction SilentlyContinue; if (Test-Path ''nul'') { Write-Host ''Still exists'' } else { Write-Host ''Removed successfully'' }\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
