@@ -1,6 +1,6 @@
-# 🎙️ Text to Speech - Multilingual Web Application
+# 🎙️ Text to Speech - English Web Application
 
-A modern, full-stack web application that converts text to speech using system voices. Supports multiple languages based on your system's installed voices.
+A modern, full-stack web application that converts English text to speech using system voices.
 
 ![Technology Stack](https://img.shields.io/badge/Frontend-React-61DAFB?style=flat&logo=react)
 ![Backend](https://img.shields.io/badge/Backend-Flask-000000?style=flat&logo=flask)
@@ -9,8 +9,8 @@ A modern, full-stack web application that converts text to speech using system v
 ## ✨ Features
 
 ### Core Features
-- 🎯 **Multilingual Support**: Supports 16+ languages (based on system-installed voices)
-- 🗣️ **Natural Speech**: Uses pyttsx3 with system voices for text-to-speech conversion
+- 🗣️ **English Text-to-Speech**: Converts English text to natural-sounding speech
+- 🎙️ **System Voice Integration**: Uses pyttsx3 with system voices for text-to-speech conversion
 - 🌐 **Cross-Platform**: Works on Windows, macOS, and Linux
 - 🎵 **Audio Player**: Interactive player with play/pause, seek, and volume controls
 - 💾 **Download Audio**: Download generated speech as WAV files
@@ -134,35 +134,17 @@ The frontend will automatically open at `http://localhost:3000`
 
 ## 📖 Usage Guide
 
-1. **Select Language**: Choose your target language from the dropdown menu
-2. **Enter Text**: Type or paste your text (up to 1000 characters)
-3. **Quick Examples**: Click example buttons for instant demos
-4. **Generate Speech**: Click "Generate Speech" to create audio
-5. **Listen**: Use the audio player to play the generated speech
-6. **Download**: Download the audio file for offline use
+1. **Enter Text**: Type or paste your English text (up to 1000 characters)
+2. **Quick Examples**: Click example buttons for instant demos
+3. **Generate Speech**: Click "Generate Speech" to create audio
+4. **Listen**: Use the audio player to play the generated speech
+5. **Download**: Download the audio file for offline use
 
-### Supported Languages
+### Language Support
 
-**Note**: Language availability depends on voices installed on your system.
+**Currently supports: English only**
 
-- English (en) - Available on all systems
-- Spanish (es)
-- French (fr)
-- German (de)
-- Italian (it)
-- Portuguese (pt)
-- Polish (pl)
-- Turkish (tr)
-- Russian (ru)
-- Dutch (nl)
-- Czech (cs)
-- Arabic (ar)
-- Chinese (zh-cn)
-- Japanese (ja)
-- Korean (ko)
-- Hindi (hi) - Requires Hindi voice installation
-
-**Adding More Languages**: See [INSTALLATION.md](INSTALLATION.md#installing-additional-language-voices) for instructions on installing additional voices.
+The application is configured to work with English language text-to-speech using system voices available on Windows, macOS, and Linux.
 
 ## 🎨 Example Inputs
 
@@ -171,17 +153,13 @@ The frontend will automatically open at `http://localhost:3000`
 Hello, welcome to our text to speech service.
 ```
 
-### Spanish
 ```
-Hola, bienvenido a nuestro servicio de texto a voz.
-```
-
-### French
-```
-Bonjour, bienvenue dans notre service de synthèse vocale.
+The quick brown fox jumps over the lazy dog.
 ```
 
-> **Note**: For best results, match the text language with the selected language option.
+```
+This application converts your English text into natural-sounding speech.
+```
 
 ## 🔧 API Endpoints
 
