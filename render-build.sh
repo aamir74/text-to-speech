@@ -2,5 +2,8 @@
 # Install system dependencies
 apt-get update && apt-get install -y espeak-ng
 
+# Upgrade pip (optional)
+pip install --upgrade pip
+
 # Then install Python deps
 pip install -r backend_requirements.txt
