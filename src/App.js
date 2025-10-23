@@ -10,8 +10,11 @@ import AudioPlayer from './components/AudioPlayer';
 import api from './services/api';
 
 function App() {
+  // Get configuration from environment variables
+  const DEFAULT_LANGUAGE = process.env.REACT_APP_DEFAULT_LANGUAGE || 'en';
+
   const [text, setText] = useState('');
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState(DEFAULT_LANGUAGE);
   const [languages, setLanguages] = useState({ en: 'English', hi: 'Hindi' });
   const [audioUrl, setAudioUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

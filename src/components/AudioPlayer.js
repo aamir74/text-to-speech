@@ -75,7 +75,7 @@ const AudioPlayer = ({ audioUrl }) => {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = audioUrl;
-    link.download = `speech_${Date.now()}.wav`;
+    link.download = `speech_${Date.now()}.mp3`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -150,7 +150,7 @@ const AudioPlayer = ({ audioUrl }) => {
 
       {/* Audio Info */}
       <div className="audio-info">
-        <p>Format: WAV | Sample Rate: 22kHz</p>
+        <p>Format: MP3 | Generated via Google TTS</p>
       </div>
     </div>
   );

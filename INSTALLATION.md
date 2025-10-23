@@ -1,61 +1,41 @@
 # 📦 Installation Guide
 
-Complete step-by-step installation instructions for the Text-to-Speech application.
+Complete installation instructions for the Text-to-Speech Frontend Application.
+
+**Note**: This is the frontend only. You must have the Node.js backend running separately on port 5000.
 
 ## System Requirements
 
 ### Minimum Requirements
 - **OS**: Windows 10+, macOS 10.14+, or Linux (Ubuntu 18.04+)
-- **Python**: 3.8 or higher
 - **Node.js**: 14.0 or higher
-- **RAM**: 4GB minimum (8GB recommended)
-- **Disk Space**: 2GB free space
+- **RAM**: 2GB minimum (4GB recommended)
+- **Disk Space**: 500MB free space
 - **Internet**: Required for initial setup
+- **Backend**: Node.js backend server (separate repository) running on `http://localhost:5000`
 
 ### Software Prerequisites
 
-#### 1. Python Installation
+#### Node.js Installation
 
 **Windows:**
-1. Download Python from [python.org](https://www.python.org/downloads/)
-2. Run installer
-3. **Important**: Check "Add Python to PATH"
-4. Verify installation:
+1. Download Node.js from [nodejs.org](https://nodejs.org/)
+2. Run installer (includes npm)
+3. Verify installation:
    ```cmd
-   python --version
-   pip --version
+   node --version
+   npm --version
    ```
 
 **macOS:**
 ```bash
 # Using Homebrew
-brew install python@3.10
+brew install node
 
 # Verify
-python3 --version
-pip3 --version
+node --version
+npm --version
 ```
-
-**Linux (Ubuntu/Debian):**
-```bash
-sudo apt update
-sudo apt install python3 python3-pip python3-venv
-
-# Verify
-python3 --version
-pip3 --version
-```
-
-#### 2. Node.js Installation
-
-**Windows/macOS:**
-1. Download from [nodejs.org](https://nodejs.org/)
-2. Run installer
-3. Verify installation:
-   ```bash
-   node --version
-   npm --version
-   ```
 
 **Linux (Ubuntu/Debian):**
 ```bash
@@ -67,180 +47,114 @@ node --version
 npm --version
 ```
 
-## Installation Methods
+## Installation
 
-### Method 1: Automated Setup (Recommended)
-
-This is the easiest way to get started.
-
-**Windows:**
-1. Open Command Prompt or PowerShell
-2. Navigate to project directory:
-   ```cmd
-   cd path\to\text-to-speech
-   ```
-3. Run setup script:
-   ```cmd
-   setup.bat
-   ```
-
-**Linux/macOS:**
-1. Open Terminal
-2. Navigate to project directory:
-   ```bash
-   cd path/to/text-to-speech
-   ```
-3. Make script executable and run:
-   ```bash
-   chmod +x setup.sh
-   ./setup.sh
-   ```
-
-The script will:
-- Create Python virtual environment
-- Install all Python dependencies
-- Install all Node.js dependencies
-- Create necessary directories
-
-### Method 2: Manual Installation
-
-For more control over the installation process.
-
-#### Step 1: Clone or Download Project
+### Step 1: Get the Project
 
 ```bash
 # If using Git
 git clone <repository-url>
-cd text-to-speech
+cd text-to-speech-frontend
 
 # Or download and extract ZIP
-cd text-to-speech
+cd text-to-speech-frontend
 ```
 
-#### Step 2: Backend Setup
-
-**Create Virtual Environment:**
-
-```bash
-# Windows
-python -m venv venv
-
-# Linux/macOS
-python3 -m venv venv
-```
-
-**Activate Virtual Environment:**
-
-```bash
-# Windows (Command Prompt)
-venv\Scripts\activate
-
-# Windows (PowerShell)
-venv\Scripts\Activate.ps1
-
-# Linux/macOS
-source venv/bin/activate
-```
-
-You should see `(venv)` in your terminal prompt.
-
-**Install Python Dependencies:**
-
-```bash
-# Upgrade pip first
-pip install --upgrade pip
-
-# Install dependencies
-pip install -r backend_requirements.txt
-```
-
-This will install:
-- Flask and flask-cors (Web framework)
-- pyttsx3 (Text-to-speech engine)
-- All required audio processing libraries
-
-**Note**: Installation may take 5-10 minutes depending on your internet speed.
-
-#### Step 3: Frontend Setup
-
-**Install Node.js Dependencies:**
+### Step 2: Install Dependencies
 
 ```bash
 npm install
 ```
 
 This will install:
-- React and ReactDOM
-- Axios (HTTP client)
-- Development tools
-- All required build dependencies
+- React 18.2.0
+- React DOM 18.2.0
+- React Scripts 5.0.1
+- Axios 1.6.2
+- All required build tools
+
+**Installation time**: 2-3 minutes depending on internet speed
+
+### Step 3: Verify Backend
+
+**CRITICAL**: Ensure your Node.js backend (separate repository) is:
+1. Running on `http://localhost:5000`
+2. Properly configured with CORS
+3. Exposing the required API endpoints
+
+Test backend:
+```bash
+curl http://localhost:5000/api/health
+```
+
+You should see a JSON health response.
+
+**Without the backend running, this frontend will not function.**
+
+## Configuration
+
+### Backend URL Configuration
+
+The frontend is configured to connect to the Node.js backend at `http://localhost:5000` via proxy.
+
+**To change the backend URL** (if your Node.js backend runs on a different port), edit `package.json`:
+
+```json
+{
+  "proxy": "http://localhost:5000"
+}
+```
+
+Change the port number to match your Node.js backend's port.
+
+### Environment Variables (Optional)
+
+Create a `.env` file in the project root:
+
+```env
+REACT_APP_API_URL=http://localhost:5000
+PORT=3000
+```
 
 ## Verification
 
-### Verify Backend Installation
+### Verify Installation
 
-1. Activate virtual environment (if not already active)
-2. Start Flask server:
-   ```bash
-   python app.py
-   ```
-
-You should see:
-```
-INFO:__main__:Initializing TTS service...
-INFO:tts_service:Initializing pyttsx3 TTS engine
-INFO:tts_service:Found X voices available
-INFO:tts_service:TTS engine loaded successfully
- * Serving Flask app 'app'
- * Running on http://127.0.0.1:5000
-```
-
-3. Press `Ctrl+C` to stop
-
-### Verify Frontend Installation
-
-1. Start development server:
+1. **Start the frontend**:
    ```bash
    npm start
    ```
 
-2. Browser should automatically open at `http://localhost:3000`
-3. You should see the Text-to-Speech interface
-4. Press `Ctrl+C` to stop
+2. **Expected output**:
+   ```
+   Compiled successfully!
+
+   You can now view text-to-speech-frontend in the browser.
+
+     Local:            http://localhost:3000
+     On Your Network:  http://192.168.x.x:3000
+   ```
+
+3. **Browser opens** at `http://localhost:3000`
+
+4. **Check connection**: Top-right should show "🟢 Server Online"
+
+5. Press `Ctrl+C` to stop
 
 ## Troubleshooting Installation Issues
 
-### Python Issues
-
-**Problem**: `python: command not found`
-- **Solution**: Python not in PATH. Reinstall Python with "Add to PATH" option
-
-**Problem**: `pip: command not found`
-- **Solution**:
-  ```bash
-  python -m ensurepip --upgrade
-  ```
-
-**Problem**: Virtual environment activation fails on Windows PowerShell
-- **Solution**: Run PowerShell as Administrator:
-  ```powershell
-  Set-ExecutionPolicy RemoteSigned
-  ```
-
-**Problem**: Package installation fails with permission errors
-- **Solution**:
-  - Don't use `sudo` with virtual environment
-  - Ensure virtual environment is activated
-  - Try: `pip install --user -r backend_requirements.txt`
-
 ### Node.js Issues
 
-**Problem**: `npm install` fails with EACCES errors
-- **Solution** (Linux/macOS):
+**Problem**: `node: command not found`
+- **Solution**: Node.js not in PATH. Reinstall Node.js and ensure "Add to PATH" is checked
+
+**Problem**: npm version too old
+- **Solution**: Update npm:
   ```bash
-  sudo chown -R $USER:$(id -gn $USER) ~/.npm
-  sudo chown -R $USER:$(id -gn $USER) ~/.config
+  npm install -g npm@latest
   ```
+
+### Installation Issues
 
 **Problem**: `npm install` fails with network errors
 - **Solution**:
@@ -250,8 +164,16 @@ INFO:tts_service:TTS engine loaded successfully
   npm install
   ```
 
+**Problem**: `npm install` fails with permission errors (Linux/macOS)
+- **Solution**:
+  ```bash
+  sudo chown -R $USER:$(id -gn $USER) ~/.npm
+  sudo chown -R $USER:$(id -gn $USER) ~/.config
+  npm install
+  ```
+
 **Problem**: Port 3000 already in use
-- **Solution**: Kill process or use different port:
+- **Solution**:
   ```bash
   # Windows
   netstat -ano | findstr :3000
@@ -261,129 +183,186 @@ INFO:tts_service:TTS engine loaded successfully
   lsof -ti:3000 | xargs kill -9
   ```
 
-### pyttsx3 Issues
-
-**Problem**: `pyttsx3.init()` fails on Windows
-- **Solution**: Install/repair Windows Speech API:
-  - Open Windows Settings
-  - Go to Time & Language > Speech
-  - Ensure speech is enabled
-
-**Problem**: No voices available
-- **Solution** (Windows):
-  - Open Settings > Time & Language > Speech
-  - Download additional languages/voices
-  - Restart application
-
-**Problem**: `pyttsx3` fails on Linux
-- **Solution**: Install espeak:
-  ```bash
-  sudo apt-get install espeak espeak-data libespeak-dev
-  ```
-
-**Problem**: `pyttsx3` fails on macOS
-- **Solution**: macOS has built-in TTS. Ensure you have:
-  - System Preferences > Accessibility > Speech enabled
-  - At least one system voice installed
-
-### General Issues
-
-**Problem**: Port 5000 already in use
-- **Solution**: Change port in `config.py`:
-  ```python
-  PORT = 5001  # Use different port
-  ```
-
-**Problem**: Out of disk space during installation
+**Problem**: Cannot connect to backend
 - **Solution**:
-  - Free up at least 2GB disk space
-  - Clear pip cache: `pip cache purge`
-  - Clear npm cache: `npm cache clean --force`
+  1. **Verify Node.js backend (separate repository) is running**: `curl http://localhost:5000/api/health`
+  2. Check CORS is enabled on the Node.js backend
+  3. Verify proxy in `package.json` points to correct backend URL
+  4. Check browser console for specific errors
+  5. Ensure backend is listening on all interfaces or localhost
 
-## Installing Additional Language Voices
+### React Issues
 
-### Windows
+**Problem**: Browser shows blank page
+- **Solution**:
+  1. Check browser console for errors
+  2. Clear browser cache
+  3. Rebuild: `npm run build && npm start`
 
-1. Open **Settings** > **Time & Language** > **Language**
-2. Click **Add a language**
-3. Select desired language (e.g., Spanish, French, Hindi)
-4. Click **Next** and **Install**
-5. Go to **Speech** settings
-6. Download voices for installed languages
+**Problem**: Hot reload not working
+- **Solution**:
+  ```bash
+  # Create/edit .env file
+  echo "FAST_REFRESH=true" > .env
+  npm start
+  ```
 
-### macOS
+## Running the Application
 
-1. Open **System Preferences** > **Accessibility** > **Spoken Content**
-2. Click **System Voice** dropdown
-3. Click **Customize**
-4. Download additional voices
-
-### Linux
+### Development Mode
 
 ```bash
-# For espeak (basic voices)
-sudo apt-get install espeak-data
-
-# For better quality voices (festival)
-sudo apt-get install festival festival-dev
+npm start
 ```
 
-## Post-Installation
+- Runs on `http://localhost:3000`
+- Hot reload enabled
+- Source maps for debugging
 
-After successful installation:
+### Production Build
 
-1. Read [QUICKSTART.md](QUICKSTART.md) to run the application
-2. Read [README.md](README.md) for full documentation
-3. Test with example texts in different languages
+```bash
+npm run build
+```
+
+Creates optimized production build in `build/` directory.
+
+### Serve Production Build
+
+```bash
+# Install serve globally
+npm install -g serve
+
+# Serve the build
+serve -s build -p 3000
+```
+
+## Project Structure
+
+```
+text-to-speech-frontend/
+├── node_modules/          # Dependencies (auto-generated)
+├── public/
+│   ├── index.html         # HTML template
+│   └── favicon.ico        # Favicon
+├── src/
+│   ├── components/
+│   │   ├── TextInput.js   # Text input component
+│   │   └── AudioPlayer.js # Audio player component
+│   ├── services/
+│   │   └── api.js         # API service layer
+│   ├── App.js             # Main app component
+│   ├── App.css            # App styles
+│   └── index.js           # Entry point
+├── .gitignore             # Git ignore rules
+├── .gitattributes         # Git line ending rules
+├── package.json           # Dependencies & scripts (includes backend proxy)
+├── package-lock.json      # Dependency lock file
+├── README.md              # Documentation
+├── QUICKSTART.md          # Quick start guide
+└── INSTALLATION.md        # This file
+```
+
+**Note**: This is frontend only. Backend files are in a separate Node.js repository.
+
+## Deployment
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Deploy to Vercel
+
+```bash
+npm install -g vercel
+vercel deploy
+```
+
+### Deploy to Netlify
+
+1. Build the project: `npm run build`
+2. Drag and drop `build` folder to Netlify
+3. Or use Netlify CLI:
+   ```bash
+   npm install -g netlify-cli
+   netlify deploy --prod
+   ```
+
+### Deploy to AWS S3
+
+```bash
+# Build
+npm run build
+
+# Upload to S3 (requires AWS CLI)
+aws s3 sync build/ s3://your-bucket-name --acl public-read
+```
+
+### Deploy with Docker
+
+Create `Dockerfile`:
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+RUN npm install -g serve
+CMD ["serve", "-s", "build", "-p", "3000"]
+EXPOSE 3000
+```
+
+Build and run:
+```bash
+docker build -t tts-frontend .
+docker run -p 3000:3000 tts-frontend
+```
 
 ## Uninstallation
 
-### Remove Python Environment
+### Remove Dependencies
 
 ```bash
-# Deactivate first
-deactivate
-
-# Remove virtual environment
-# Windows
-rmdir /s venv
-
-# Linux/macOS
-rm -rf venv
-```
-
-### Remove Node Modules
-
-```bash
-# Windows
-rmdir /s node_modules
-
-# Linux/macOS
+# Remove node_modules
 rm -rf node_modules
+
+# Remove package lock
+rm package-lock.json
 ```
 
-### Remove Generated Files
+### Remove Build Files
 
 ```bash
-# Windows
-rmdir /s generated_audio build
-
-# Linux/macOS
-rm -rf generated_audio build
+rm -rf build
 ```
+
+### Complete Clean
+
+```bash
+# Remove all generated files
+rm -rf node_modules build package-lock.json
+```
+
+## Next Steps
+
+After installation:
+1. **Ensure your Node.js backend (separate repository) is running on port 5000**
+2. Read [QUICKSTART.md](QUICKSTART.md) to start using the app
+3. Read [README.md](README.md) for full documentation
+4. Test with example texts
 
 ## Getting Help
 
-If you encounter issues not covered here:
-
-1. Check the [Troubleshooting](#troubleshooting-installation-issues) section above
-2. Review error messages carefully
-3. Search for similar issues online
-4. Open an issue on the repository with:
-   - Your OS and version
-   - Python and Node.js versions
-   - Complete error message
-   - Steps to reproduce
+If you encounter issues:
+1. **First, ensure Node.js backend (separate repository) is running on port 5000**
+2. Check [Troubleshooting](#troubleshooting-installation-issues) section
+3. Review error messages in terminal
+4. Check browser console for errors
+5. Verify backend is accessible: `curl http://localhost:5000/api/health`
+6. Verify Node.js and npm versions
 
 ---
 

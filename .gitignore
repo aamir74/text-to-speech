@@ -1,62 +1,26 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-venv/
-ENV/
-env/
-.venv/
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-# Flask
-instance/
-.webassets-cache
-
-# Audio files
-generated_audio/*.wav
-generated_audio/*.mp3
-generated_audio/*.ogg
-!generated_audio/.gitkeep
-
-# TTS Models (downloaded by Coqui TTS or other TTS engines)
-tts_models/
-.models/
-*.pth
-*.ckpt
-
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
-
-# React
+# Production build
 /build
-.DS_Store
+
+# Testing
+/coverage
+
+# Environment
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
 
 # IDE
 .vscode/
@@ -77,17 +41,6 @@ Desktop.ini
 *.log
 logs/
 
-# Testing
-.coverage
-htmlcov/
-.pytest_cache/
-.tox/
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
 # Temporary files
 *.tmp
 *.bak
@@ -102,3 +55,21 @@ prn
 aux
 com[1-9]
 lpt[1-9]
+
+# Optional npm cache
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Misc
+.DS_Store
+Thumbs.db
+
+# Claude Code
+.claude/
+.claude_code/
+.clauderc
+.claude_history
+claude-code.log
+.claude_sessions/

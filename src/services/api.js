@@ -5,8 +5,9 @@
 
 import axios from 'axios';
 
-// Base URL for API requests
-const API_BASE_URL = 'http://localhost:5000/api';
+// Base URL for API requests from environment variable
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+const API_TIMEOUT = parseInt(process.env.REACT_APP_API_TIMEOUT) || 30000;
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -14,7 +15,7 @@ const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 30000, // 30 seconds timeout
+  timeout: API_TIMEOUT,
 });
 
 /**
@@ -27,7 +28,7 @@ const api = {
    */
   healthCheck: async () => {
     try {
-      const response = await apiClient.get('/health');
+      const response = await apiClient.get('/');
       return response.data;
     } catch (error) {
       console.error('Health check failed:', error);

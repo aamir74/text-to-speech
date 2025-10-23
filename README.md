@@ -1,21 +1,20 @@
-# 🎙️ Text to Speech - English Web Application
+# 🎙️ Text to Speech - Frontend Application
 
-A modern, full-stack web application that converts English text to speech using system voices.
+A modern React-based frontend for a Text-to-Speech application. This frontend connects to a separate Node.js backend service (running on http://localhost:5000) for text-to-speech conversion.
 
 ![Technology Stack](https://img.shields.io/badge/Frontend-React-61DAFB?style=flat&logo=react)
-![Backend](https://img.shields.io/badge/Backend-Flask-000000?style=flat&logo=flask)
-![TTS Engine](https://img.shields.io/badge/TTS-pyttsx3-4A90E2?style=flat)
+![Backend](https://img.shields.io/badge/Backend-Node.js-339933?style=flat&logo=node.js)
+
+**Note**: This is the frontend only. The Node.js backend must be running separately on port 5000.
 
 ## ✨ Features
 
 ### Core Features
-- 🗣️ **English Text-to-Speech**: Converts English text to natural-sounding speech
-- 🎙️ **System Voice Integration**: Uses pyttsx3 with system voices for text-to-speech conversion
-- 🌐 **Cross-Platform**: Works on Windows, macOS, and Linux
+- 🗣️ **English Text-to-Speech**: Converts English text to natural-sounding speech via backend API
 - 🎵 **Audio Player**: Interactive player with play/pause, seek, and volume controls
 - 💾 **Download Audio**: Download generated speech as WAV files
 - 📱 **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- ⚡ **Fast & Lightweight**: No heavy AI models to download, uses system resources efficiently
+- ⚡ **Fast & Lightweight**: Clean React application with minimal dependencies
 
 ### User Interface
 - Modern gradient design with smooth animations
@@ -26,10 +25,9 @@ A modern, full-stack web application that converts English text to speech using 
 - Clean, intuitive user experience
 
 ### Technical Features
-- RESTful API architecture
-- Component-based React frontend
-- Flask backend with CORS support
-- Audio file management and cleanup
+- RESTful API integration
+- Component-based React architecture
+- Axios for HTTP requests
 - Error handling and validation
 - Production-ready code structure
 
@@ -38,99 +36,47 @@ A modern, full-stack web application that converts English text to speech using 
 ### Frontend
 - **React** 18.2.0 - Modern UI framework
 - **Axios** 1.6.2 - HTTP client for API calls
+- **React Scripts** 5.0.1 - Build tooling
 - **Custom CSS** - Responsive styling with gradients
 
-### Backend
-- **Flask** 3.0.0 - Lightweight web framework
-- **pyttsx3** 2.90 - Cross-platform text-to-speech engine
-- **Flask-CORS** 4.0.0 - Cross-origin resource sharing
-
-### Audio Processing
-- **System TTS engines**: SAPI5 (Windows), NSSpeechSynthesizer (macOS), espeak (Linux)
-- WAV format output
-- Configurable speech rate and volume
+### Backend (Separate Repository)
+- **Node.js** - Backend runtime
+- **Express** - Backend framework (assumed)
+- Runs on `http://localhost:5000`
 
 ## 📦 Installation
 
 ### Prerequisites
-- **Python 3.8+** - [Download Python](https://www.python.org/downloads/)
 - **Node.js 14+** - [Download Node.js](https://nodejs.org/)
-- **pip** - Python package installer (included with Python)
 - **npm** - Node package manager (included with Node.js)
-- **System TTS Support**:
-  - Windows: Built-in SAPI5 (Windows Speech API)
-  - macOS: Built-in NSSpeechSynthesizer
-  - Linux: Install espeak (`sudo apt-get install espeak`)
+- **Backend Server** - Running Node.js backend on `http://localhost:5000`
 
-> 📖 **Detailed instructions**: See [INSTALLATION.md](INSTALLATION.md) for step-by-step guide
+### Frontend Setup
 
-### Quick Setup
-
-#### Option 1: Automated Setup (Recommended)
-
-**Windows:**
-```cmd
-setup.bat
-```
-
-**Linux/Mac:**
+1. **Clone or download the project**
 ```bash
-chmod +x setup.sh
-./setup.sh
+cd text-to-speech-frontend
 ```
 
-#### Option 2: Manual Setup
-
-**1. Clone or download the project**
-```bash
-cd text-to-speech
-```
-
-**2. Install Python dependencies**
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
-
-# Install dependencies
-pip install -r backend_requirements.txt
-```
-
-**3. Install Node.js dependencies**
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
+3. **Ensure backend is running**
+   - Make sure your Node.js backend is running on `http://localhost:5000`
+   - The frontend is configured to proxy API requests to this address
+
 ## 🚀 Running the Application
 
-You need to run both the backend and frontend servers:
-
-### Terminal 1 - Backend Server
+### Start Frontend Server
 ```bash
-# Activate virtual environment (if not already active)
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
-
-# Start Flask server
-python app.py
-```
-
-The backend will start on `http://localhost:5000`
-
-### Terminal 2 - Frontend Server
-```bash
-# Start React development server
 npm start
 ```
 
 The frontend will automatically open at `http://localhost:3000`
+
+**Note**: Ensure your Node.js backend is running on `http://localhost:5000` before starting the frontend.
 
 ## 📖 Usage Guide
 
@@ -144,7 +90,7 @@ The frontend will automatically open at `http://localhost:3000`
 
 **Currently supports: English only**
 
-The application is configured to work with English language text-to-speech using system voices available on Windows, macOS, and Linux.
+The application is configured to work with English language text-to-speech through the backend API.
 
 ## 🎨 Example Inputs
 
@@ -161,7 +107,9 @@ The quick brown fox jumps over the lazy dog.
 This application converts your English text into natural-sounding speech.
 ```
 
-## 🔧 API Endpoints
+## 🔧 API Integration
+
+The frontend expects the backend to expose the following endpoints:
 
 ### Health Check
 ```http
@@ -189,76 +137,49 @@ Content-Type: application/json
 GET /api/audio/{filename}
 ```
 
-### Cleanup Old Files
-```http
-POST /api/cleanup
-```
-
 ## 📁 Project Structure
 
 ```
-text-to-speech/
-├── backend/
-│   ├── app.py                 # Flask server
-│   ├── tts_service.py         # TTS service logic
-│   ├── config.py              # Configuration
-│   └── backend_requirements.txt
-├── frontend/
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── TextInput.js
-│   │   │   └── AudioPlayer.js
-│   │   ├── services/
-│   │   │   └── api.js
-│   │   ├── App.js
-│   │   ├── App.css
-│   │   └── index.js
-│   └── package.json
-├── generated_audio/           # Output directory
-├── setup.sh                   # Linux/Mac setup
-├── setup.bat                  # Windows setup
+text-to-speech-frontend/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── TextInput.js
+│   │   └── AudioPlayer.js
+│   ├── services/
+│   │   └── api.js
+│   ├── App.js
+│   ├── App.css
+│   └── index.js
+├── package.json
 ├── .gitignore
 └── README.md
 ```
 
 ## 🛠️ Configuration
 
-Edit `config.py` to customize:
+### Backend API URL
 
-- `HOST` and `PORT` - Server address
-- `MAX_TEXT_LENGTH` - Maximum input length (default: 1000 characters)
-- `AUDIO_FILE_LIFETIME` - Auto-cleanup interval (default: 1 hour)
-- `SPEECH_RATE` - Words per minute (default: 150)
-- `SPEECH_VOLUME` - Volume level 0.0-1.0 (default: 1.0)
-- `AUDIO_FORMAT` - Output format (default: WAV)
+The backend URL is configured in `package.json`:
+
+```json
+{
+  "proxy": "http://localhost:5000"
+}
+```
+
+To change the backend URL, update this proxy setting.
+
+### Environment Variables (Optional)
+
+You can create a `.env` file for configuration:
+
+```env
+REACT_APP_API_URL=http://localhost:5000
+```
 
 ## 🐛 Troubleshooting
-
-### Backend Issues
-
-**Problem**: `ModuleNotFoundError: No module named 'flask'` or `'pyttsx3'`
-- **Solution**: Activate virtual environment and install dependencies
-  ```bash
-  # Activate venv first
-  venv\Scripts\activate  # Windows
-  source venv/bin/activate  # Linux/macOS
-
-  # Then install
-  pip install -r backend_requirements.txt
-  ```
-
-**Problem**: Audio generation hangs after first request
-- **Solution**: This is fixed in the current version. Each request uses a fresh TTS engine instance. Restart the Flask server if issues persist.
-
-**Problem**: No voices available / pyttsx3 initialization fails
-- **Windows**: Ensure Windows Speech API is enabled in Settings > Time & Language > Speech
-- **Linux**: Install espeak: `sudo apt-get install espeak espeak-data`
-- **macOS**: Built-in, should work out of the box
-
-**Problem**: Port 5000 already in use
-- **Solution**: Change `PORT` in `config.py` or kill the process using port 5000
 
 ### Frontend Issues
 
@@ -266,69 +187,63 @@ Edit `config.py` to customize:
 - **Solution**: Delete `node_modules` and `package-lock.json`, then run `npm install` again
 
 **Problem**: Cannot connect to backend
-- **Solution**: Ensure backend is running on `http://localhost:5000` and check CORS settings
+- **Solution**:
+  - Ensure backend is running on `http://localhost:5000`
+  - Check browser console for CORS errors
+  - Verify proxy setting in `package.json`
 
 **Problem**: Audio not playing
-- **Solution**: Check browser console for errors, ensure backend generated the file successfully
+- **Solution**:
+  - Check browser console for errors
+  - Ensure backend generated the file successfully
+  - Check network tab in browser DevTools
+
+**Problem**: Port 3000 already in use
+- **Solution**:
+  ```bash
+  # Windows
+  netstat -ano | findstr :3000
+  taskkill /PID <PID> /F
+
+  # Linux/macOS
+  lsof -ti:3000 | xargs kill -9
+  ```
+
+## 🚀 Building for Production
+
+### Create Production Build
+```bash
+npm run build
+```
+
+This creates an optimized build in the `build/` directory.
+
+### Serve Production Build
+```bash
+npx serve -s build
+```
+
+### Deploy to Hosting
+- **Vercel**: `vercel deploy`
+- **Netlify**: Drag and drop `build` folder
+- **AWS S3**: Upload `build` folder contents
 
 ## 🔐 Security Considerations
 
 - Input validation and sanitization
 - Text length limits to prevent abuse
-- CORS configuration for localhost only
-- Automatic cleanup of old audio files
+- CORS configuration for allowed origins
 - No sensitive data in error messages
-
-## 🚀 Deployment
-
-### Production Checklist
-
-1. **Environment Variables**
-   - Set `DEBUG = False` in `config.py`
-   - Configure production CORS origins
-   - Use environment variables for sensitive config
-
-2. **Backend**
-   - Use Gunicorn or uWSGI instead of Flask dev server
-   ```bash
-   gunicorn -w 4 -b 0.0.0.0:5000 app:app
-   ```
-
-3. **Frontend**
-   - Build production bundle
-   ```bash
-   npm run build
-   ```
-   - Serve with nginx or Apache
-
-4. **Audio Storage**
-   - Configure cloud storage (AWS S3, etc.) for audio files
-   - Implement CDN for faster delivery
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-## 📄 License
-
-This project is created for educational purposes as part of a technical assignment.
-
-## 🙏 Acknowledgments
-
-- **pyttsx3** - Cross-platform text-to-speech library
-- **React & Flask** - Excellent web frameworks
-- **System TTS Engines** - SAPI5, NSSpeechSynthesizer, espeak
-- Open-source community for amazing tools and libraries
 
 ## 📞 Support
 
 For issues or questions:
 - Check the troubleshooting section
 - Review the code comments
-- Open an issue on the repository
+- Check browser console for errors
 
 ---
 
-**Built with ❤️ using Modern Web Technologies**
+**Built with ❤️ using React**
 
-*Powered by pyttsx3 | React | Flask*
+*Frontend for Node.js Text-to-Speech Backend*

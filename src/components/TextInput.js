@@ -6,7 +6,7 @@
 import React from 'react';
 
 const TextInput = ({ text, setText, language, setLanguage, onGenerate, isLoading, languages }) => {
-  const MAX_LENGTH = 1000;
+  const MAX_LENGTH = parseInt(process.env.REACT_APP_MAX_TEXT_LENGTH) || 1000;
 
   // Example texts for quick testing
   const examples = [
